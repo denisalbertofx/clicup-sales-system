@@ -13,10 +13,21 @@ const nextConfig: NextConfig = {
   // Enable compression for faster responses
   compress: true,
 
+  // Compiler optimizations
+  compiler: {
+    // Remove console.logs in production
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
+
   // Experimental features for better performance
   experimental: {
     // Optimize package imports to reduce bundle size
-    optimizePackageImports: ['lucide-react', 'framer-motion'],
+    optimizePackageImports: [
+      'lucide-react',
+      'framer-motion',
+      '@radix-ui/react-accordion',
+      '@radix-ui/react-slot',
+    ],
   },
 };
 

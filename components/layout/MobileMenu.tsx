@@ -31,7 +31,11 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
                         className="fixed right-0 top-0 bottom-0 w-3/4 max-w-sm bg-background border-l border-border z-50 p-6 md:hidden flex flex-col"
                     >
                         <div className="flex justify-end mb-8">
-                            <button onClick={onClose} className="p-2 text-muted-foreground hover:text-foreground">
+                            <button
+                                onClick={onClose}
+                                className="p-2 text-muted-foreground hover:text-foreground"
+                                aria-label="Cerrar menú"
+                            >
                                 <X size={24} />
                             </button>
                         </div>
