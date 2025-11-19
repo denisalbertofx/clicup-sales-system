@@ -36,15 +36,15 @@ export function Hero() {
                 />
             </div>
 
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 relative z-10">
-                <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-                    {/* Left Column - Copy */}
-                    <div className="text-center lg:text-left">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-20 relative z-10">
+                <div className="flex flex-col lg:grid lg:grid-cols-2 gap-6 lg:gap-12 items-center">
+                    {/* Left Column - Copy (First on mobile) */}
+                    <div className="text-center lg:text-left order-1 lg:order-1">
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5 }}
-                            className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-4 sm:mb-6"
+                            className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-3 sm:mb-4"
                         >
                             <Sparkles className="h-3 w-3 sm:h-4 sm:w-4 text-primary" />
                             <span className="text-xs sm:text-sm font-semibold text-primary">El CRM #1 para Negocios Hispanos</span>
@@ -54,7 +54,7 @@ export function Hero() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: 0.1 }}
-                            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-foreground mb-4 sm:mb-6 leading-tight"
+                            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-heading font-bold text-foreground mb-3 sm:mb-4 leading-tight"
                         >
                             ¿Cuánto Dinero Pierdes por <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-orange-500">Citas Canceladas</span>?
                         </motion.h1>
@@ -63,7 +63,7 @@ export function Hero() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: 0.2 }}
-                            className="text-base sm:text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8 sm:mb-10 leading-relaxed"
+                            className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground mb-6 sm:mb-8 leading-relaxed"
                         >
                             Descubre cómo <span className="text-foreground font-semibold">reducir cancelaciones y recuperar ingresos</span> con el CRM diseñado para negocios locales hispanos.
                         </motion.p>
@@ -76,7 +76,7 @@ export function Hero() {
                             className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start mb-6"
                         >
                             <Link href="/demo" className="w-full sm:w-auto">
-                                <Button size="lg" className="w-full sm:w-auto h-12 sm:h-14 px-6 sm:px-8 text-base sm:text-lg font-semibold group shadow-xl shadow-primary/25">
+                                <Button size="lg" className="w-full sm:w-auto h-11 sm:h-12 md:h-14 px-5 sm:px-6 md:px-8 text-sm sm:text-base md:text-lg font-semibold group shadow-xl shadow-primary/25">
                                     Agendar Mi Demo Gratis
                                     <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 transition-transform group-hover:translate-x-1" />
                                 </Button>
@@ -103,7 +103,7 @@ export function Hero() {
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.7, delay: 0.3 }}
-                        className="relative order-first lg:order-last"
+                        className="relative order-first lg:order-last w-full max-w-md lg:max-w-none mx-auto"
                     >
                         <DashboardMockup />
 

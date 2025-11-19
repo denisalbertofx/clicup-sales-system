@@ -62,52 +62,61 @@ export function ComparisonTable() {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="max-w-4xl mx-auto overflow-x-auto"
+                    className="max-w-4xl mx-auto"
                 >
-                    <div className="bg-card border border-border rounded-xl overflow-hidden">
-                        <table className="w-full">
-                            <thead>
-                                <tr className="border-b border-border">
-                                    <th className="text-left p-4 font-semibold text-foreground w-2/5">
-                                        Características
-                                    </th>
-                                    {comparisonData.columns.map((column, idx) => (
-                                        <th
-                                            key={idx}
-                                            className={`p-4 text-center font-semibold ${column.highlight
-                                                ? "bg-primary/10 border-2 border-primary text-primary"
-                                                : "text-foreground"
-                                                }`}
-                                        >
-                                            {column.name}
+                    {/* Mobile: Scroll hint */}
+                    <div className="md:hidden text-center mb-4">
+                        <p className="text-xs text-muted-foreground">← Desliza para ver más →</p>
+                    </div>
+
+                    <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
+                        <div className="bg-card border border-border rounded-xl overflow-hidden min-w-[600px] md:min-w-0">
+                            <table className="w-full">
+                                <thead>
+                                    <tr className="border-b border-border">
+                                        <th className="text-left p-3 md:p-4 font-semibold text-foreground w-2/5 text-xs md:text-sm">
+                                            Características
                                         </th>
-                                    ))}
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {comparisonData.criteria.map((criterion, rowIdx) => (
-                                    <tr
-                                        key={rowIdx}
-                                        className="border-b border-border last:border-0 hover:bg-secondary/30 transition-colors h-16"
-                                    >
-                                        <td className="p-4 text-sm text-foreground font-medium">{criterion}</td>
-                                        {comparisonData.columns.map((column, colIdx) => (
-                                            <td
-                                                key={colIdx}
-                                                className={`p-4 text-center ${column.highlight ? "bg-primary/5" : ""
+                                        {comparisonData.columns.map((column, idx) => (
+                                            <th
+                                                key={idx}
+                                                className={`p-3 md:p-4 text-center font-semibold text-xs md:text-sm ${column.highlight
+                                                        ? "bg-primary/10 border-x-2 border-primary text-primary"
+                                                        : "text-foreground"
                                                     }`}
                                             >
-                                                {column.values[rowIdx] ? (
-                                                    <Check className="h-6 w-6 text-green-600 dark:text-green-500 mx-auto font-bold stroke-[3]" />
-                                                ) : (
-                                                    <X className="h-6 w-6 text-red-500 dark:text-red-400 mx-auto opacity-40" />
-                                                )}
-                                            </td>
+                                                {column.name}
+                                            </th>
                                         ))}
                                     </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    {comparisonData.criteria.map((criterion, rowIdx) => (
+                                        <tr
+                                            key={rowIdx}
+                                            className="border-b border-border last:border-0 hover:bg-secondary/30 transition-colors"
+                                        >
+                                            <td className="p-3 md:p-4 text-xs md:text-sm text-foreground font-medium leading-tight">
+                                                {criterion}
+                                            </td>
+                                            {comparisonData.columns.map((column, colIdx) => (
+                                                <td
+                                                    key={colIdx}
+                                                    className={`p-3 md:p-4 text-center ${column.highlight ? "bg-primary/5" : ""
+                                                        }`}
+                                                >
+                                                    {column.values[rowIdx] ? (
+                                                        <Check className="h-5 w-5 md:h-6 md:w-6 text-green-600 dark:text-green-500 mx-auto font-bold stroke-[3]" />
+                                                    ) : (
+                                                        <X className="h-5 w-5 md:h-6 md:w-6 text-red-500 dark:text-red-400 mx-auto opacity-40" />
+                                                    )}
+                                                </td>
+                                            ))}
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </motion.div>
 
