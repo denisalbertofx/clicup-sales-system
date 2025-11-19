@@ -47,7 +47,8 @@ export function FAQ() {
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.3, ease: "easeOut" }}
                         className="text-3xl md:text-5xl font-heading font-bold text-foreground mb-4"
                     >
                         Preguntas Frecuentes
@@ -55,8 +56,8 @@ export function FAQ() {
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.3, ease: "easeOut" }}
                         className="text-lg text-muted-foreground max-w-2xl mx-auto"
                     >
                         Respuestas a las preguntas más comunes sobre ClicUp.

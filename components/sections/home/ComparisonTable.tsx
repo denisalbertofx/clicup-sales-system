@@ -41,7 +41,8 @@ export function ComparisonTable() {
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.3, ease: "easeOut" }}
                         className="text-3xl md:text-5xl font-heading font-bold text-foreground mb-4"
                     >
                         ¿Por Qué Elegir ClicUp?
@@ -49,8 +50,8 @@ export function ComparisonTable() {
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.3, ease: "easeOut" }}
                         className="text-lg text-muted-foreground max-w-2xl mx-auto"
                     >
                         Compara y descubre por qué somos la mejor opción para tu negocio.
@@ -74,8 +75,8 @@ export function ComparisonTable() {
                                         <th
                                             key={idx}
                                             className={`p-4 text-center font-semibold ${column.highlight
-                                                    ? "bg-primary/10 border-2 border-primary text-primary"
-                                                    : "text-foreground"
+                                                ? "bg-primary/10 border-2 border-primary text-primary"
+                                                : "text-foreground"
                                                 }`}
                                         >
                                             {column.name}

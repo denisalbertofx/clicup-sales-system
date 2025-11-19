@@ -44,7 +44,8 @@ export function Testimonials() {
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.3, ease: "easeOut" }}
                         className="text-3xl md:text-5xl font-heading font-bold text-foreground mb-4"
                     >
                         Resultados Reales de Negocios Como el Tuyo
@@ -52,8 +53,8 @@ export function Testimonials() {
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 }}
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ duration: 0.3, ease: "easeOut" }}
                         className="text-lg text-muted-foreground max-w-2xl mx-auto"
                     >
                         No solo palabras bonitas. Estos son los resultados que nuestros clientes están logrando.
@@ -66,9 +67,10 @@ export function Testimonials() {
                             key={testimonial.id}
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
-                            className="bg-card border border-border rounded-lg p-6 relative"
+                            viewport={{ once: true, amount: 0.2 }}
+                            transition={{ duration: 0.3, ease: "easeOut" }}
+                            style={{ willChange: 'transform, opacity' }}
+                            className="bg-card border border-border rounded-xl p-8 relative hover:border-primary/50 transition-all hover:shadow-xl hover:shadow-primary/5"
                         >
                             <Quote className="absolute top-4 right-4 h-8 w-8 text-primary/20" />
 
