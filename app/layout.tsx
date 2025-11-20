@@ -27,6 +27,10 @@ export const metadata: Metadata = {
   },
   description: "Convierte más visitantes en clientes leales con la plataforma de marketing y ventas diseñada para negocios locales hispanos.",
   keywords: ["marketing", "crm", "automatización", "negocios hispanos", "gohighlevel", "saas"],
+  icons: {
+    icon: '/favicon.png',
+    apple: '/favicon.png',
+  },
 };
 
 export default function RootLayout({
