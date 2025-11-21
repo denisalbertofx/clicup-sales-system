@@ -41,7 +41,6 @@ function StarterContent() {
     };
 
     return (
-    return (
         <div className="min-h-screen font-sans selection:bg-green-400 selection:text-blue-950">
 
             {/* Hero Section */}
