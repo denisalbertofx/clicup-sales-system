@@ -60,72 +60,83 @@ export default function LeadMagnetPage() {
                     </p>
                 </motion.div>
 
-                {/* Visual Representation of "Money Leaking" */}
-                <div className="my-12 flex justify-center">
-                    <div className="relative w-64 h-64 bg-gray-900 rounded-full flex items-center justify-center border-4 border-gray-800 shadow-[0_0_50px_rgba(61,255,181,0.1)]">
-                        <div className="absolute inset-0 flex items-center justify-center animate-pulse opacity-20">
-                            <div className="w-48 h-48 bg-green-500 rounded-full blur-3xl"></div>
-                        </div>
-                        <TrendingUp className="w-32 h-32 text-red-500 rotate-180" /> {/* Arrow going down representing loss */}
-                    </div>
-                </div>
-
                 {/* Form Card */}
-                <div className="max-w-md mx-auto bg-gray-800 p-8 rounded-xl border border-gray-700 shadow-2xl relative overflow-hidden">
-                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 to-green-400"></div>
-                    <h3 className="text-2xl font-bold mb-6">Solicita tu Auditoría Express</h3>
+                <div className="max-w-md mx-auto relative group">
+                    {/* Glow Effect */}
+                    <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 to-green-400 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
 
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                        <div>
-                            <input
-                                type="text"
-                                placeholder="Tu Nombre"
-                                required
-                                className="w-full bg-gray-900 border border-gray-700 rounded-lg p-4 text-white placeholder-gray-500 focus:ring-2 focus:ring-green-400 focus:border-transparent outline-none transition-all"
-                                value={formState.name}
-                                onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                            />
-                        </div>
-                        <div>
-                            <input
-                                type="email"
-                                placeholder="Tu Mejor Email"
-                                required
-                                className="w-full bg-gray-900 border border-gray-700 rounded-lg p-4 text-white placeholder-gray-500 focus:ring-2 focus:ring-green-400 focus:border-transparent outline-none transition-all"
-                                value={formState.email}
-                                onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                            />
-                        </div>
-                        <div>
-                            <input
-                                type="text"
-                                placeholder="Sitio Web (o Facebook)"
-                                required
-                                className="w-full bg-gray-900 border border-gray-700 rounded-lg p-4 text-white placeholder-gray-500 focus:ring-2 focus:ring-green-400 focus:border-transparent outline-none transition-all"
-                                value={formState.website}
-                                onChange={(e) => setFormState({ ...formState, website: e.target.value })}
-                            />
+                    <div className="relative bg-gray-900 p-8 rounded-xl border border-gray-800 shadow-2xl overflow-hidden">
+                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 to-green-400"></div>
+
+                        <div className="mb-8 text-center">
+                            <span className="inline-block py-1 px-3 rounded-full bg-green-500/10 text-green-400 text-xs font-bold tracking-wider mb-3 border border-green-500/20">
+                                OFERTA POR TIEMPO LIMITADO
+                            </span>
+                            <h3 className="text-2xl font-bold text-white">Solicita tu Auditoría Express</h3>
+                            <p className="text-gray-400 text-sm mt-2">Descubre lo que tu competencia no quiere que sepas.</p>
                         </div>
 
-                        {error && (
-                            <div className="text-red-400 text-sm flex items-center gap-2">
-                                <AlertCircle className="w-4 h-4" />
-                                {error}
+                        <form onSubmit={handleSubmit} className="space-y-5">
+                            <div>
+                                <label className="sr-only">Tu Nombre</label>
+                                <input
+                                    type="text"
+                                    placeholder="Tu Nombre"
+                                    required
+                                    className="w-full bg-gray-800 border border-gray-700 rounded-lg p-4 text-white placeholder-gray-500 focus:ring-2 focus:ring-cyan-400 focus:border-transparent outline-none transition-all"
+                                    value={formState.name}
+                                    onChange={(e) => setFormState({ ...formState, name: e.target.value })}
+                                />
                             </div>
-                        )}
+                            <div>
+                                <label className="sr-only">Tu Mejor Email</label>
+                                <input
+                                    type="email"
+                                    placeholder="Tu Mejor Email"
+                                    required
+                                    className="w-full bg-gray-800 border border-gray-700 rounded-lg p-4 text-white placeholder-gray-500 focus:ring-2 focus:ring-cyan-400 focus:border-transparent outline-none transition-all"
+                                    value={formState.email}
+                                    onChange={(e) => setFormState({ ...formState, email: e.target.value })}
+                                />
+                            </div>
+                            <div>
+                                <label className="sr-only">Sitio Web (o Facebook)</label>
+                                <input
+                                    type="text"
+                                    placeholder="Sitio Web (o Facebook)"
+                                    required
+                                    className="w-full bg-gray-800 border border-gray-700 rounded-lg p-4 text-white placeholder-gray-500 focus:ring-2 focus:ring-cyan-400 focus:border-transparent outline-none transition-all"
+                                    value={formState.website}
+                                    onChange={(e) => setFormState({ ...formState, website: e.target.value })}
+                                />
+                            </div>
 
-                        <button
-                            type="submit"
-                            disabled={isSubmitting}
-                            className="w-full py-4 px-8 rounded-lg text-lg font-bold text-blue-950 bg-gradient-to-r from-cyan-400 to-green-400 hover:scale-105 transition-transform duration-200 disabled:opacity-70 disabled:cursor-not-allowed shadow-lg shadow-green-400/20"
-                        >
-                            {isSubmitting ? 'Enviando...' : 'QUIERO MI AUDITORÍA GRATIS'}
-                        </button>
+                            {error && (
+                                <div className="text-red-400 text-sm flex items-center gap-2 bg-red-500/10 p-3 rounded-lg border border-red-500/20">
+                                    <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                                    {error}
+                                </div>
+                            )}
 
-                        <p className="text-xs text-gray-500 mt-4">
-                            Tus datos están 100% seguros. No compartimos tu información.
-                        </p>
-                    </form>
+                            <button
+                                type="submit"
+                                disabled={isSubmitting}
+                                className="w-full py-4 px-8 rounded-lg text-lg font-bold text-blue-950 bg-gradient-to-r from-cyan-400 to-green-400 hover:shadow-[0_0_20px_rgba(61,255,181,0.4)] hover:scale-[1.02] transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100"
+                            >
+                                {isSubmitting ? (
+                                    <span className="flex items-center justify-center gap-2">
+                                        <div className="w-5 h-5 border-2 border-blue-950 border-t-transparent rounded-full animate-spin" />
+                                        Analizando...
+                                    </span>
+                                ) : 'QUIERO MI AUDITORÍA GRATIS'}
+                            </button>
+
+                            <div className="flex items-center justify-center gap-2 text-xs text-gray-500 mt-4">
+                                <ShieldCheck className="w-3 h-3" />
+                                <span>Tus datos están 100% seguros y encriptados.</span>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </section>
 
