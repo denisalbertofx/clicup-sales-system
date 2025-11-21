@@ -4,8 +4,9 @@ import { useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { CheckCircle, Calendar, PlayCircle, Users, ArrowRight, Star } from 'lucide-react';
 import Link from 'next/link';
+import { Suspense } from 'react';
 
-export default function OnboardingPage() {
+function OnboardingContent() {
     const searchParams = useSearchParams();
     const isVip = searchParams.get('upsell') === 'true';
 
@@ -128,5 +129,13 @@ export default function OnboardingPage() {
 
             </main>
         </div>
+    );
+}
+
+export default function OnboardingPage() {
+    return (
+        <Suspense fallback={<div className="min-h-screen bg-gray-950 flex items-center justify-center text-white">Cargando...</div>}>
+            <OnboardingContent />
+        </Suspense>
     );
 }
