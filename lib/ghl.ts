@@ -31,8 +31,8 @@ export const createGHLContact = async (contactData: ContactData) => {
             source: 'ClicUp Funnel'
         });
         return response.data.contact;
-    } catch (error: unknown) {
-        console.error('Error creating contact in GHL:', error);
+    } catch (error: any) {
+        console.error('Error creating contact in GHL:', error.response?.data || error.message);
         throw error;
     }
 };

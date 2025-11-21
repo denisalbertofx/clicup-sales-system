@@ -20,9 +20,8 @@ export async function POST(req: Request) {
             firstName: name.split(' ')[0],
             lastName: name.split(' ').slice(1).join(' '),
             tags: ['Lead_Magnet_Limpieza'],
-            customFields: [
-                { key: 'website', value: website } // Asegúrate de que este campo exista en GHL o usa uno estándar
-            ]
+
+            website: website
         });
 
         if (!contact) {
