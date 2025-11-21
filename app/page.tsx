@@ -1,67 +1,10 @@
 'use client';
 
-import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { AlertCircle, CheckCircle, Clock, MessageSquare, TrendingUp, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Clock, MessageSquare, TrendingUp, ShieldCheck } from 'lucide-react';
+import AuditFormEmbed from '@/components/forms/AuditFormEmbed';
 
 export default function LeadMagnetPage() {
-    const [formState, setFormState] = useState({
-        name: '',
-        email: '',
-        website: '',
-    });
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [isSuccess, setIsSuccess] = useState(false);
-    const [error, setError] = useState('');
-
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setIsSubmitting(true);
-        setError('');
-
-        try {
-            const response = await fetch('/api/lead', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formState),
-            });
-
-            if (!response.ok) throw new Error('Error al enviar el formulario');
-
-            setIsSuccess(true);
-        } catch (err) {
-            setError('Hubo un error. Por favor intenta de nuevo.');
-        } finally {
-            setIsSubmitting(false);
-        }
-    };
-
-    if (isSuccess) {
-        return (
-            <div className="min-h-screen bg-gray-950 flex items-center justify-center p-4">
-                <div className="max-w-2xl w-full bg-gray-800 p-8 rounded-xl border border-gray-700 text-center shadow-2xl">
-                    <CheckCircle className="w-20 h-20 text-green-400 mx-auto mb-6" />
-                    <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                        ¡Excelente! Tu auditoría está en camino.
-                    </h1>
-                    <p className="text-lg text-gray-400 mb-8">
-                        Mientras la revisas, agenda una llamada opcional de 10 minutos con un especialista para interpretar tus resultados y darte un plan de acción inmediato.
-                    </p>
-
-                    <a
-                        href="https://calendly.com/TU_LINK_AQUI" // TODO: Reemplazar con link real de GHL
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center w-full md:w-auto py-4 px-8 rounded-lg text-xl font-bold text-blue-950 bg-gradient-to-r from-cyan-400 to-green-400 hover:scale-105 transition-transform duration-200"
-                    >
-                        Agendar Llamada de 10 Minutos
-                        <ArrowRight className="ml-2 w-6 h-6" />
-                    </a>
-                </div>
-            </div>
-        );
-    }
-
     return (
         <div className="min-h-screen font-sans selection:bg-green-400 selection:text-blue-950">
             {/* Hero Section */}
@@ -90,61 +33,9 @@ export default function LeadMagnetPage() {
                 </div>
 
                 {/* Form Card */}
-                <div className="max-w-md mx-auto bg-gray-800 p-8 rounded-xl border border-gray-700 shadow-2xl relative overflow-hidden">
-                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 to-green-400"></div>
-                    <h3 className="text-2xl font-bold mb-6">Solicita tu Auditoría Express</h3>
-
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                        <div>
-                            <input
-                                type="text"
-                                placeholder="Tu Nombre"
-                                required
-                                className="w-full bg-gray-900 border border-gray-700 rounded-lg p-4 text-white placeholder-gray-500 focus:ring-2 focus:ring-green-400 focus:border-transparent outline-none transition-all"
-                                value={formState.name}
-                                onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                            />
-                        </div>
-                        <div>
-                            <input
-                                type="email"
-                                placeholder="Tu Mejor Email"
-                                required
-                                className="w-full bg-gray-900 border border-gray-700 rounded-lg p-4 text-white placeholder-gray-500 focus:ring-2 focus:ring-green-400 focus:border-transparent outline-none transition-all"
-                                value={formState.email}
-                                onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                            />
-                        </div>
-                        <div>
-                            <input
-                                type="text"
-                                placeholder="Sitio Web (o Facebook)"
-                                required
-                                className="w-full bg-gray-900 border border-gray-700 rounded-lg p-4 text-white placeholder-gray-500 focus:ring-2 focus:ring-green-400 focus:border-transparent outline-none transition-all"
-                                value={formState.website}
-                                onChange={(e) => setFormState({ ...formState, website: e.target.value })}
-                            />
-                        </div>
-
-                        {error && (
-                            <div className="text-red-400 text-sm flex items-center gap-2">
-                                <AlertCircle className="w-4 h-4" />
-                                {error}
-                            </div>
-                        )}
-
-                        <button
-                            type="submit"
-                            disabled={isSubmitting}
-                            className="w-full py-4 px-8 rounded-lg text-lg font-bold text-blue-950 bg-gradient-to-r from-cyan-400 to-green-400 hover:scale-105 transition-transform duration-200 disabled:opacity-70 disabled:cursor-not-allowed shadow-lg shadow-green-400/20"
-                        >
-                            {isSubmitting ? 'Enviando...' : 'QUIERO MI AUDITORÍA GRATIS'}
-                        </button>
-
-                        <p className="text-xs text-gray-500 mt-4">
-                            Tus datos están 100% seguros. No compartimos tu información.
-                        </p>
-                    </form>
+                <div className="max-w-2xl mx-auto relative z-10">
+                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 to-green-400 rounded-t-2xl"></div>
+                    <AuditFormEmbed />
                 </div>
             </section>
 
