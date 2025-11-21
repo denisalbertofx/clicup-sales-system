@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 import AuditFormEmbed from "@/components/forms/AuditFormEmbed";
@@ -55,7 +56,9 @@ export default function AuditPage() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.2 }}
                     >
-                        <AuditFormEmbed />
+                        <Suspense fallback={<div className="h-[600px] w-full bg-card/50 animate-pulse rounded-2xl" />}>
+                            <AuditFormEmbed />
+                        </Suspense>
                     </motion.div>
 
                     {/* Trust Signals */}
