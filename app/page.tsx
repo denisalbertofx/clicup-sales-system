@@ -63,7 +63,7 @@ export default function LeadMagnetPage() {
     }
 
     return (
-        <div className="min-h-screen bg-gray-950 font-sans text-white selection:bg-green-400 selection:text-blue-950">
+        <div className="min-h-screen font-sans selection:bg-green-400 selection:text-blue-950">
             {/* Hero Section */}
             <section className="max-w-4xl mx-auto px-4 py-16 md:py-24 text-center">
                 <motion.div
@@ -223,10 +223,7 @@ export default function LeadMagnetPage() {
                 </div>
             </section>
 
-            {/* Footer Simple */}
-            <footer className="py-8 text-center text-gray-600 text-sm">
-                <p>© {new Date().getFullYear()} ClicUp. Todos los derechos reservados.</p>
-            </footer>
+
         </div>
     );
 }
