@@ -41,12 +41,8 @@ function StarterContent() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-950 font-sans text-white selection:bg-green-400 selection:text-blue-950">
-
-            {/* Header / Nav Placeholder */}
-            <nav className="p-4 text-center border-b border-gray-800 bg-gray-900/50 backdrop-blur-sm sticky top-0 z-50">
-                <span className="font-bold text-xl tracking-tight">ClicUp <span className="text-green-400">Starter</span></span>
-            </nav>
+    return (
+        <div className="min-h-screen font-sans selection:bg-green-400 selection:text-blue-950">
 
             {/* Hero Section */}
             <section className="max-w-4xl mx-auto px-4 py-16 text-center">
@@ -61,7 +57,7 @@ function StarterContent() {
                     <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
                         El Sistema Exacto para Instalar una <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-green-400">Agenda Automática</span> en tu Negocio de Limpieza
                     </h1>
-                    <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
+                    <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-3xl mx-auto">
                         Deja de perder tiempo con clientes que no responden y obtén un flujo constante de citas calificadas. <span className="text-green-400 font-bold">Por solo $27.</span>
                     </p>
                 </motion.div>
@@ -70,7 +66,7 @@ function StarterContent() {
             {/* VSL / Problem Section */}
             <section className="max-w-3xl mx-auto px-4 py-12">
                 <div className="prose prose-invert prose-lg mx-auto">
-                    <p className="text-gray-400 italic text-lg border-l-4 border-green-400 pl-4 mb-8">
+                    <p className="text-muted-foreground italic text-lg border-l-4 border-green-400 pl-4 mb-8">
                         &quot;Déjame adivinar. Amas tu negocio de limpieza, eres bueno en lo que haces, pero odias la parte de &apos;vender&apos;...&quot;
                     </p>
                     <p>
@@ -79,7 +75,7 @@ function StarterContent() {
                     <p>
                         Ese ciclo es agotador. Y es la razón #1 por la que el 90% de los negocios de servicios locales fracasan.
                     </p>
-                    <p className="font-bold text-white text-xl">
+                    <p className="font-bold text-foreground text-xl">
                         Pero, ¿y si el problema no fueras tú? ¿Y si el problema fuera que sigues usando un modelo roto?
                     </p>
                     <p>
@@ -89,7 +85,7 @@ function StarterContent() {
             </section>
 
             {/* Solution / Value Stack */}
-            <section className="bg-gray-900 py-20 border-y border-gray-800">
+            <section className="bg-secondary/20 py-20 border-y border-border">
                 <div className="max-w-4xl mx-auto px-4">
                     <h2 className="text-3xl font-bold text-center mb-12">
                         Esto es TODO lo que recibes por solo $27:
@@ -134,49 +130,49 @@ function StarterContent() {
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: i * 0.1 }}
-                                className="flex items-start space-x-4 p-6 bg-gray-800 rounded-xl border border-gray-700 hover:border-green-400/50 transition-colors"
+                                className="flex items-start space-x-4 p-6 bg-card rounded-xl border border-border hover:border-green-400/50 transition-colors"
                             >
                                 <div className="flex-shrink-0 bg-green-400/10 p-2 rounded-full">
                                     <Check className="w-6 h-6 text-green-400" />
                                 </div>
                                 <div className="flex-1">
-                                    <h3 className="text-xl font-bold text-white">{item.title}</h3>
-                                    <p className="text-gray-400 mt-1">{item.desc}</p>
+                                    <h3 className="text-xl font-bold text-foreground">{item.title}</h3>
+                                    <p className="text-muted-foreground mt-1">{item.desc}</p>
                                 </div>
                                 <div className="hidden md:block text-right">
-                                    <span className="text-xs text-gray-500 uppercase">Valor</span>
-                                    <div className="text-gray-400 line-through font-mono">{item.value}</div>
+                                    <span className="text-xs text-muted-foreground uppercase">Valor</span>
+                                    <div className="text-muted-foreground line-through font-mono">{item.value}</div>
                                 </div>
                             </motion.div>
                         ))}
                     </div>
 
                     <div className="mt-8 text-center">
-                        <p className="text-2xl text-gray-500">Valor Total: <span className="line-through decoration-red-500">$704</span></p>
+                        <p className="text-2xl text-muted-foreground">Valor Total: <span className="line-through decoration-red-500">$704</span></p>
                     </div>
                 </div>
             </section>
 
             {/* Offer Box */}
             <section className="max-w-3xl mx-auto px-4 py-20">
-                <div className="bg-gray-900 p-8 md:p-12 rounded-2xl border-2 border-green-400 shadow-[0_0_60px_rgba(61,255,181,0.15)] relative overflow-hidden">
+                <div className="bg-card p-8 md:p-12 rounded-2xl border-2 border-green-400 shadow-[0_0_60px_rgba(61,255,181,0.15)] relative overflow-hidden">
                     {/* Badge */}
                     <div className="absolute top-0 right-0 bg-green-400 text-blue-950 font-bold py-1 px-8 transform rotate-45 translate-x-8 translate-y-4 shadow-lg">
                         AHORRA 96%
                     </div>
 
                     <div className="text-center mb-10">
-                        <h3 className="text-3xl font-bold text-white mb-4">Obtén Acceso Inmediato</h3>
+                        <h3 className="text-3xl font-bold text-foreground mb-4">Obtén Acceso Inmediato</h3>
                         <div className="flex items-center justify-center gap-4 mb-2">
-                            <span className="text-4xl text-gray-600 line-through">$197</span>
-                            <span className="text-7xl font-extrabold text-white tracking-tight">$27</span>
+                            <span className="text-4xl text-muted-foreground line-through">$197</span>
+                            <span className="text-7xl font-extrabold text-foreground tracking-tight">$27</span>
                         </div>
                         <p className="text-green-400 font-medium">Pago único. Sin contratos.</p>
                     </div>
 
                     <form onSubmit={handleCheckout} className="max-w-md mx-auto space-y-4">
                         <div>
-                            <label htmlFor="email" className="block text-sm font-medium text-gray-400 mb-1">
+                            <label htmlFor="email" className="block text-sm font-medium text-muted-foreground mb-1">
                                 Tu Email para el acceso:
                             </label>
                             <input
@@ -184,7 +180,7 @@ function StarterContent() {
                                 id="email"
                                 required
                                 placeholder="ejemplo@correo.com"
-                                className="w-full bg-gray-950 border border-gray-700 rounded-lg p-4 text-white focus:ring-2 focus:ring-green-400 outline-none transition-all"
+                                className="w-full bg-background border border-input rounded-lg p-4 text-foreground focus:ring-2 focus:ring-green-400 outline-none transition-all"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                             />
@@ -212,7 +208,7 @@ function StarterContent() {
                             )}
                         </button>
 
-                        <div className="flex items-center justify-center gap-2 text-xs text-gray-500 mt-4">
+                        <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground mt-4">
                             <Shield className="w-4 h-4" />
                             Pago 100% Seguro con Stripe
                         </div>
@@ -220,23 +216,18 @@ function StarterContent() {
                 </div>
 
                 {/* Guarantee */}
-                <div className="mt-12 bg-blue-950/50 border border-cyan-500/30 p-6 rounded-xl flex flex-col md:flex-row items-center gap-6 max-w-2xl mx-auto">
+                <div className="mt-12 bg-secondary/20 border border-cyan-500/30 p-6 rounded-xl flex flex-col md:flex-row items-center gap-6 max-w-2xl mx-auto">
                     <div className="flex-shrink-0">
                         <Shield className="w-16 h-16 text-cyan-400" />
                     </div>
                     <div className="text-center md:text-left">
-                        <h4 className="text-lg font-bold text-white mb-2">Garantía de Implementación en 7 Días</h4>
-                        <p className="text-gray-400 text-sm">
+                        <h4 className="text-lg font-bold text-foreground mb-2">Garantía de Implementación en 7 Días</h4>
+                        <p className="text-muted-foreground text-sm">
                             Si después de 7 días no tienes tu sistema andando, te devolvemos tu dinero y te quedas con todas las plantillas. Sin preguntas.
                         </p>
                     </div>
                 </div>
             </section>
-
-            {/* Footer */}
-            <footer className="py-8 text-center text-gray-600 text-sm border-t border-gray-900">
-                <p>© {new Date().getFullYear()} ClicUp. Todos los derechos reservados.</p>
-            </footer>
         </div>
     );
 }
