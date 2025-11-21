@@ -1,56 +1,232 @@
-import dynamic from "next/dynamic";
-import { Hero } from "@/components/sections/home/Hero";
-import { SocialProof } from "@/components/sections/home/SocialProof";
+'use client';
 
-// Lazy load below-the-fold components for better performance
-const Features = dynamic(
-  () => import("@/components/sections/home/Features").then((mod) => ({ default: mod.Features })),
-  {
-    loading: () => <div className="h-96 bg-secondary/30" />,
-  }
-);
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { AlertCircle, CheckCircle, Clock, MessageSquare, TrendingUp, ArrowRight, ShieldCheck } from 'lucide-react';
 
-const PainPoints = dynamic(
-  () => import("@/components/sections/home/PainPoints").then((mod) => ({ default: mod.PainPoints }))
-);
+export default function LeadMagnetPage() {
+    const [formState, setFormState] = useState({
+        name: '',
+        email: '',
+        website: '',
+    });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
+    const [error, setError] = useState('');
 
-const HowItWorks = dynamic(
-  () => import("@/components/sections/home/HowItWorks").then((mod) => ({ default: mod.HowItWorks }))
-);
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+        setError('');
 
-const ComparisonTable = dynamic(
-  () => import("@/components/sections/home/ComparisonTable").then((mod) => ({ default: mod.ComparisonTable }))
-);
+        try {
+            const response = await fetch('/api/lead', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formState),
+            });
 
-const Testimonials = dynamic(
-  () => import("@/components/sections/home/Testimonials").then((mod) => ({ default: mod.Testimonials }))
-);
+            if (!response.ok) throw new Error('Error al enviar el formulario');
 
-const Guarantees = dynamic(
-  () => import("@/components/sections/home/Guarantees").then((mod) => ({ default: mod.Guarantees }))
-);
+            setIsSuccess(true);
+        } catch (err) {
+            setError('Hubo un error. Por favor intenta de nuevo.');
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
 
-const FAQ = dynamic(
-  () => import("@/components/sections/home/FAQ").then((mod) => ({ default: mod.FAQ }))
-);
+    if (isSuccess) {
+        return (
+            <div className="min-h-screen bg-gray-950 flex items-center justify-center p-4">
+                <div className="max-w-2xl w-full bg-gray-800 p-8 rounded-xl border border-gray-700 text-center shadow-2xl">
+                    <CheckCircle className="w-20 h-20 text-green-400 mx-auto mb-6" />
+                    <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                        ¡Excelente! Tu auditoría está en camino.
+                    </h1>
+                    <p className="text-lg text-gray-400 mb-8">
+                        Mientras la revisas, agenda una llamada opcional de 10 minutos con un especialista para interpretar tus resultados y darte un plan de acción inmediato.
+                    </p>
 
-const StickyCTA = dynamic(
-  () => import("@/components/ui/sticky-cta").then((mod) => ({ default: mod.StickyCTA }))
-);
+                    <a
+                        href="https://calendly.com/TU_LINK_AQUI" // TODO: Reemplazar con link real de GHL
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center w-full md:w-auto py-4 px-8 rounded-lg text-xl font-bold text-blue-950 bg-gradient-to-r from-cyan-400 to-green-400 hover:scale-105 transition-transform duration-200"
+                    >
+                        Agendar Llamada de 10 Minutos
+                        <ArrowRight className="ml-2 w-6 h-6" />
+                    </a>
+                </div>
+            </div>
+        );
+    }
 
-export default function Home() {
-  return (
-    <div className="flex flex-col">
-      <Hero />
-      <SocialProof />
-      <Features />
-      <PainPoints />
-      <HowItWorks />
-      <ComparisonTable />
-      <Testimonials />
-      <Guarantees />
-      <FAQ />
-      <StickyCTA />
-    </div>
-  );
+    return (
+        <div className="min-h-screen bg-gray-950 font-sans text-white selection:bg-green-400 selection:text-blue-950">
+            {/* Hero Section */}
+            <section className="max-w-4xl mx-auto px-4 py-16 md:py-24 text-center">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5 }}
+                >
+                    <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
+                        ¿Cansado de perder clientes de limpieza que <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-green-400">cotizan y desaparecen?</span>
+                    </h1>
+                    <p className="text-xl md:text-2xl text-gray-400 mb-10 max-w-3xl mx-auto">
+                        Recibe una <span className="text-white font-bold">Auditoría GRATIS</span> en 5 minutos que te muestra exactamente por dónde se están escapando tus ganancias y cómo tapar esas fugas para siempre.
+                    </p>
+                </motion.div>
+
+                {/* Visual Representation of "Money Leaking" */}
+                <div className="my-12 flex justify-center">
+                    <div className="relative w-64 h-64 bg-gray-900 rounded-full flex items-center justify-center border-4 border-gray-800 shadow-[0_0_50px_rgba(61,255,181,0.1)]">
+                        <div className="absolute inset-0 flex items-center justify-center animate-pulse opacity-20">
+                            <div className="w-48 h-48 bg-green-500 rounded-full blur-3xl"></div>
+                        </div>
+                        <TrendingUp className="w-32 h-32 text-red-500 rotate-180" /> {/* Arrow going down representing loss */}
+                    </div>
+                </div>
+
+                {/* Form Card */}
+                <div className="max-w-md mx-auto bg-gray-800 p-8 rounded-xl border border-gray-700 shadow-2xl relative overflow-hidden">
+                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-400 to-green-400"></div>
+                    <h3 className="text-2xl font-bold mb-6">Solicita tu Auditoría Express</h3>
+
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                        <div>
+                            <input
+                                type="text"
+                                placeholder="Tu Nombre"
+                                required
+                                className="w-full bg-gray-900 border border-gray-700 rounded-lg p-4 text-white placeholder-gray-500 focus:ring-2 focus:ring-green-400 focus:border-transparent outline-none transition-all"
+                                value={formState.name}
+                                onChange={(e) => setFormState({ ...formState, name: e.target.value })}
+                            />
+                        </div>
+                        <div>
+                            <input
+                                type="email"
+                                placeholder="Tu Mejor Email"
+                                required
+                                className="w-full bg-gray-900 border border-gray-700 rounded-lg p-4 text-white placeholder-gray-500 focus:ring-2 focus:ring-green-400 focus:border-transparent outline-none transition-all"
+                                value={formState.email}
+                                onChange={(e) => setFormState({ ...formState, email: e.target.value })}
+                            />
+                        </div>
+                        <div>
+                            <input
+                                type="text"
+                                placeholder="Sitio Web (o Facebook)"
+                                required
+                                className="w-full bg-gray-900 border border-gray-700 rounded-lg p-4 text-white placeholder-gray-500 focus:ring-2 focus:ring-green-400 focus:border-transparent outline-none transition-all"
+                                value={formState.website}
+                                onChange={(e) => setFormState({ ...formState, website: e.target.value })}
+                            />
+                        </div>
+
+                        {error && (
+                            <div className="text-red-400 text-sm flex items-center gap-2">
+                                <AlertCircle className="w-4 h-4" />
+                                {error}
+                            </div>
+                        )}
+
+                        <button
+                            type="submit"
+                            disabled={isSubmitting}
+                            className="w-full py-4 px-8 rounded-lg text-lg font-bold text-blue-950 bg-gradient-to-r from-cyan-400 to-green-400 hover:scale-105 transition-transform duration-200 disabled:opacity-70 disabled:cursor-not-allowed shadow-lg shadow-green-400/20"
+                        >
+                            {isSubmitting ? 'Enviando...' : 'QUIERO MI AUDITORÍA GRATIS'}
+                        </button>
+
+                        <p className="text-xs text-gray-500 mt-4">
+                            Tus datos están 100% seguros. No compartimos tu información.
+                        </p>
+                    </form>
+                </div>
+            </section>
+
+            {/* Pain Points Section */}
+            <section className="bg-gray-900 py-20 border-y border-gray-800">
+                <div className="max-w-6xl mx-auto px-4">
+                    <div className="grid md:grid-cols-3 gap-12">
+                        {[
+                            {
+                                icon: <TrendingUp className="w-8 h-8 text-blue-950" />,
+                                title: "¿Inviertes en anuncios pero solo llegan curiosos?",
+                                desc: "Te mostraremos por qué tu seguimiento actual no convierte y cómo filtrarlos automáticamente."
+                            },
+                            {
+                                icon: <MessageSquare className="w-8 h-8 text-blue-950" />,
+                                title: "¿Te dejan en 'visto' tras cotizar?",
+                                desc: "Descubre la secuencia de mensajes exacta que hace que te respondan y te contraten."
+                            },
+                            {
+                                icon: <Clock className="w-8 h-8 text-blue-950" />,
+                                title: "¿Tu competencia siempre tiene agenda llena?",
+                                desc: "No es suerte. Es un sistema. Te revelamos el componente clave que ellos usan y tú no."
+                            }
+                        ].map((item, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.2 }}
+                                className="text-center"
+                            >
+                                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-cyan-500 to-green-400 mb-6 shadow-lg shadow-green-400/20">
+                                    {item.icon}
+                                </div>
+                                <h3 className="text-xl font-bold text-white mb-3">{item.title}</h3>
+                                <p className="text-gray-400 leading-relaxed">{item.desc}</p>
+                            </motion.div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Audit Description */}
+            <section className="max-w-4xl mx-auto px-4 py-20">
+                <div className="bg-gray-800 rounded-2xl p-8 md:p-12 border border-gray-700">
+                    <h2 className="text-3xl font-bold text-white mb-8 text-center">
+                        Lo que descubrirás en tu Auditoría Express
+                    </h2>
+                    <div className="space-y-8">
+                        {[
+                            {
+                                title: "Tu Puntaje de 'Velocidad de Contacto'",
+                                desc: "¿Sabías que si no contactas a un lead en los primeros 5 minutos, la probabilidad de cerrarlo cae un 80%? Mediremos tu velocidad actual."
+                            },
+                            {
+                                title: "El Agujero Negro de las Cotizaciones Perdidas",
+                                desc: "Identificaremos si tienes un sistema para recuperar a los que preguntaron precio y nunca más respondieron."
+                            },
+                            {
+                                title: "Tu Potencial de Reputación Online",
+                                desc: "Analizaremos cómo estás (o no estás) usando las reseñas de tus clientes felices para atraer nuevos contratos en automático."
+                            }
+                        ].map((item, i) => (
+                            <div key={i} className="flex gap-4">
+                                <div className="flex-shrink-0 mt-1">
+                                    <ShieldCheck className="w-6 h-6 text-green-400" />
+                                </div>
+                                <div>
+                                    <h4 className="text-xl font-bold text-white mb-2">{item.title}</h4>
+                                    <p className="text-gray-400">{item.desc}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* Footer Simple */}
+            <footer className="py-8 text-center text-gray-600 text-sm">
+                <p>© {new Date().getFullYear()} ClicUp. Todos los derechos reservados.</p>
+            </footer>
+        </div>
+    );
 }
