@@ -44,7 +44,7 @@ export function FeatureVisual({ icon: Icon, title, color = "primary" }: FeatureV
                     animate={{
                         opacity: [0, 1, 0],
                         y: [20, -20, -40],
-                        x: [0, Math.random() * 40 - 20, Math.random() * 60 - 30],
+                        x: [0, 20, -20],
                     }}
                     transition={{
                         duration: 3,

@@ -43,10 +43,10 @@ export async function POST(req: Request) {
         });
 
         return NextResponse.json({ url: session.url });
-    } catch (error: any) {
-        console.error('Error creando sesión de checkout:', error);
+    } catch (err: unknown) {
+        console.error('Error creating checkout session:', err);
         return NextResponse.json(
-            { error: error.message || 'Error interno del servidor' },
+            { error: err instanceof Error ? err.message : 'Error creating checkout session' },
             { status: 500 }
         );
     }

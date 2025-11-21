@@ -43,8 +43,9 @@ function UpsellContent() {
             // aunque el webhook se encargará de los tags en GHL)
             router.push('/onboarding?upsell=true');
 
-        } catch (err: any) {
-            setError(err.message || 'Hubo un error con el pago 1-Click. Por favor intenta de nuevo.');
+        } catch (err: unknown) {
+            const message = err instanceof Error ? err.message : 'Hubo un error con el pago 1-Click. Por favor intenta de nuevo.';
+            setError(message);
             setLoading(false);
         }
     };

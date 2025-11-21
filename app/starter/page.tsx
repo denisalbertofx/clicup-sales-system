@@ -33,8 +33,9 @@ function StarterContent() {
             if (!response.ok) throw new Error(data.error || 'Error al iniciar el pago');
             if (data.url) window.location.href = data.url;
 
-        } catch (err: any) {
-            setError(err.message || 'Hubo un error. Intenta de nuevo.');
+        } catch (err: unknown) {
+            const message = err instanceof Error ? err.message : 'Hubo un error. Intenta de nuevo.';
+            setError(message);
             setLoading(false);
         }
     };
@@ -70,10 +71,10 @@ function StarterContent() {
             <section className="max-w-3xl mx-auto px-4 py-12">
                 <div className="prose prose-invert prose-lg mx-auto">
                     <p className="text-gray-400 italic text-lg border-l-4 border-green-400 pl-4 mb-8">
-                        "Déjame adivinar. Amas tu negocio de limpieza, eres bueno en lo que haces, pero odias la parte de 'vender'..."
+                        &quot;Déjame adivinar. Amas tu negocio de limpieza, eres bueno en lo que haces, pero odias la parte de &apos;vender&apos;...&quot;
                     </p>
                     <p>
-                        Odias enviar una cotización y sentir esa ansiedad de no saber si te responderán. Odias llamar a un cliente potencial y que te digan "lo voy a pensar".
+                        Odias enviar una cotización y sentir esa ansiedad de no saber si te responderán. Odias llamar a un cliente potencial y que te digan &quot;lo voy a pensar&quot;.
                     </p>
                     <p>
                         Ese ciclo es agotador. Y es la razón #1 por la que el 90% de los negocios de servicios locales fracasan.

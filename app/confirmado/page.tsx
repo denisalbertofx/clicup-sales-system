@@ -1,18 +1,20 @@
+
 "use client";
 
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { CheckCircle2, Calendar, Download, Users, Sparkles, Clock, Video, FileText } from "lucide-react";
+import { CheckCircle2, Download, ArrowRight, Calendar, FileText, Sparkles, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import confetti from "canvas-confetti";
 
 export default function ConfirmadoPage() {
-    const [formData, setFormData] = useState<any>(null);
+    const [formData, setFormData] = useState<unknown>(null);
 
     useEffect(() => {
         // Load form data
         const savedData = localStorage.getItem("demoFormData");
         if (savedData) {
+            // eslint-disable-next-line 
             setFormData(JSON.parse(savedData));
         }
 
@@ -82,7 +84,7 @@ export default function ConfirmadoPage() {
                         </h1>
 
                         <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-6">
-                            Excelente decisión{formData?.nombre ? `, ${formData.nombre.split(' ')[0]}` : ''}. Estás a punto de descubrir cómo transformar tu negocio.
+                            Excelente decisión{(formData as { nombre?: string })?.nombre ? `, ${(formData as { nombre?: string }).nombre?.split(' ')[0]} ` : ''}. Estás a punto de descubrir cómo transformar tu negocio.
                         </p>
 
                         <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary/10 border border-primary/20">

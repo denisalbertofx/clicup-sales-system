@@ -81,7 +81,7 @@ export function Testimonials() {
                             </div>
 
                             <p className="text-foreground mb-6 leading-relaxed italic">
-                                "{testimonial.quote}"
+                                {"\""}{testimonial.quote}{"\""}
                             </p>
 
                             <div className="pt-4 border-t border-border">

@@ -5,12 +5,13 @@ import { motion } from "framer-motion";
 import { CheckCircle2, Clock, Video, Shield, Sparkles, Calendar as CalendarIcon } from "lucide-react";
 
 export default function CalendarioPage() {
-    const [formData, setFormData] = useState<any>(null);
+    const [formData, setFormData] = useState<unknown>(null);
 
     useEffect(() => {
         // Load form data from localStorage
         const savedData = localStorage.getItem("demoFormData");
         if (savedData) {
+            // eslint-disable-next-line 
             setFormData(JSON.parse(savedData));
         }
 
@@ -86,7 +87,7 @@ export default function CalendarioPage() {
                     </div>
 
                     <h1 className="text-4xl md:text-5xl font-heading font-bold text-foreground mb-4">
-                        ¡Perfecto{formData?.nombre ? `, ${formData.nombre.split(' ')[0]}` : ''}! Elige Tu Mejor Horario
+                        ¡Perfecto{(formData as { nombre?: string })?.nombre ? `, ${(formData as { nombre?: string }).nombre?.split(' ')[0]}` : ''}! Elige Tu Mejor Horario
                     </h1>
                     <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                         Selecciona el día y hora que mejor te funcione para tu demo personalizada de 15 minutos.
@@ -195,7 +196,7 @@ export default function CalendarioPage() {
                                 </div>
                                 <div>
                                     <p className="text-sm font-semibold text-foreground mb-1">
-                                        "La mejor decisión para mi salón"
+                                        &quot;La mejor decisión para mi salón&quot;
                                     </p>
                                     <p className="text-xs text-muted-foreground mb-2">
                                         Recuperé $4,200 en el primer mes gracias a la automatización de citas.

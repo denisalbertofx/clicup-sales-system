@@ -18,15 +18,20 @@ export async function POST(req: Request) {
             signature,
             process.env.STRIPE_WEBHOOK_SECRET
         );
-    } catch (err: any) {
-        console.error(`Webhook signature verification failed: ${err.message}`);
+    } catch (err: unknown) {
+        const message = err instanceof Error ? err.message : 'Unknown error';
+        console.error(`Webhook signature verification failed: ${message}`);
         return NextResponse.json({ error: 'Webhook Error' }, { status: 400 });
     }
 
     try {
         switch (event.type) {
             case 'checkout.session.completed': {
-                const session = event.data.object as any;
+                const session = event.data.object as unknown as {
+                    customer_details?: { email?: string; name?: string };
+                    customer?: string;
+                    amount_total: number;
+                };
                 const email = session.customer_details?.email;
                 const name = session.customer_details?.name;
                 const stripeCustomerId = session.customer;
@@ -43,7 +48,7 @@ export async function POST(req: Request) {
                     }
 
                     // Buscar contacto existente o crear uno nuevo
-                    let contact = await getGHLContactByEmail(email);
+                    const contact = await getGHLContactByEmail(email);
 
                     if (contact) {
                         await updateGHLContact(contact.id, {
@@ -63,7 +68,11 @@ export async function POST(req: Request) {
             }
 
             case 'payment_intent.succeeded': {
-                const paymentIntent = event.data.object as any;
+                const paymentIntent = event.data.object as unknown as {
+                    metadata?: { product?: string };
+                    amount: number;
+                    customer?: string;
+                };
 
                 // Verificar si es el Upsell (por metadata o monto)
                 if (paymentIntent.metadata?.product === 'upsell_acelerador' || paymentIntent.amount === 9700) {
@@ -71,7 +80,7 @@ export async function POST(req: Request) {
                     // pero podemos recuperar el customer de Stripe
                     const customerId = paymentIntent.customer;
                     if (customerId) {
-                        const customer = await stripe.customers.retrieve(customerId) as any;
+                        const customer = await stripe.customers.retrieve(customerId) as unknown as { email?: string };
                         const email = customer.email;
 
                         if (email) {
@@ -92,7 +101,7 @@ export async function POST(req: Request) {
         }
 
         return NextResponse.json({ received: true });
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error('Error processing webhook:', error);
         return NextResponse.json(
             { error: 'Webhook handler failed' },

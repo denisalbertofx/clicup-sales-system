@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { DemoFormModal } from "@/components/forms/DemoFormModal";
 
 export function DemoFormProvider({ children }: { children: React.ReactNode }) {
@@ -15,10 +15,17 @@ export function DemoFormProvider({ children }: { children: React.ReactNode }) {
 function DemoFormModalWrapper() {
     const [isOpen, setIsOpen] = useState(false);
 
-    // Listen for custom event to open modal
-    if (typeof window !== "undefined") {
-        window.openDemoModal = () => setIsOpen(true);
-    }
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            window.openDemoModal = () => setIsOpen(true);
+        }
+        return () => {
+            if (typeof window !== "undefined") {
+                // @ts-expect-error - window extension
+                delete window.openDemoModal;
+            }
+        };
+    }, []);
 
     return <DemoFormModal isOpen={isOpen} onClose={() => setIsOpen(false)} />;
 }

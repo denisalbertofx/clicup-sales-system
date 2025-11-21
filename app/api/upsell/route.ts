@@ -16,7 +16,7 @@ export async function POST(req: Request) {
         });
 
         const customerId = session.customer as string;
-        const paymentIntent = session.payment_intent as any;
+        const paymentIntent = session.payment_intent as unknown as { payment_method?: { id: string } };
         const paymentMethodId = paymentIntent?.payment_method?.id;
 
         if (!customerId || !paymentMethodId) {
@@ -64,10 +64,10 @@ export async function POST(req: Request) {
             );
         }
 
-    } catch (error: any) {
-        console.error('Error en Upsell 1-Click:', error);
+    } catch (err: unknown) {
+        console.error('Error creating payment intent:', err);
         return NextResponse.json(
-            { error: error.message || 'Error procesando el upsell' },
+            { error: err instanceof Error ? err.message : 'Error creating payment intent' },
             { status: 500 }
         );
     }
