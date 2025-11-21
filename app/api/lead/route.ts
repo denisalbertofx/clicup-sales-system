@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createGHLContact } from '@/lib/ghl';
+import axios from 'axios';
 
 export async function POST(req: Request) {
     try {
@@ -13,32 +13,30 @@ export async function POST(req: Request) {
             );
         }
 
-        // Crear contacto en GHL
-        const contact = await createGHLContact({
-            email,
-            name, // GHL a veces usa 'name' o 'firstName'/'lastName' dependiendo de la versión, pero el helper lo maneja
-            firstName: name.split(' ')[0],
-            lastName: name.split(' ').slice(1).join(' '),
-            tags: ['Lead_Magnet_Limpieza'],
+        // Enviar datos al Webhook de GHL
+        const webhookUrl = process.env.GHL_WEBHOOK_URL;
 
-            website: website
-        });
-
-        if (!contact) {
-            // Si falla GHL, aún así podemos devolver éxito al frontend si queremos "fail open"
-            // o devolver error. Para este caso, devolvemos error para debuggear.
-            console.error('Fallo al crear contacto en GHL');
+        if (!webhookUrl) {
+            console.error('GHL_WEBHOOK_URL no está definida');
             return NextResponse.json(
-                { error: 'Error al procesar el registro' },
+                { error: 'Error de configuración del servidor' },
                 { status: 500 }
             );
         }
 
-        return NextResponse.json({ success: true, contact });
-    } catch (error) {
-        console.error('Error en API lead:', error);
+        await axios.post(webhookUrl, {
+            name,
+            email,
+            website,
+            source: 'ClicUp Funnel',
+            tags: ['Lead_Magnet_Limpieza']
+        });
+
+        return NextResponse.json({ success: true });
+    } catch (error: any) {
+        console.error('Error en API lead (Webhook):', error.message);
         return NextResponse.json(
-            { error: 'Error interno del servidor' },
+            { error: 'Error al procesar el registro' },
             { status: 500 }
         );
     }
