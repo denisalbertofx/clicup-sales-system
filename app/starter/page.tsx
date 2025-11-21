@@ -1,11 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import { Check, Shield, ArrowRight, AlertTriangle, Star } from 'lucide-react';
 import { useSearchParams } from 'next/navigation';
 
-export default function StarterPage() {
+function StarterContent() {
     const searchParams = useSearchParams();
     const [email, setEmail] = useState('');
     const [loading, setLoading] = useState(false);
@@ -237,5 +237,13 @@ export default function StarterPage() {
                 <p>© {new Date().getFullYear()} ClicUp. Todos los derechos reservados.</p>
             </footer>
         </div>
+    );
+}
+
+export default function StarterPage() {
+    return (
+        <Suspense fallback={<div className="min-h-screen bg-gray-950 flex items-center justify-center text-white">Cargando...</div>}>
+            <StarterContent />
+        </Suspense>
     );
 }

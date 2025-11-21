@@ -1,12 +1,12 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Check, AlertTriangle, Loader2, Lock, PlayCircle } from 'lucide-react';
 import Link from 'next/link';
 
-export default function UpsellPage() {
+function UpsellContent() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const [sessionId, setSessionId] = useState<string | null>(null);
@@ -120,6 +120,7 @@ export default function UpsellPage() {
                         {loading ? (
                             <>
                                 <Loader2 className="w-6 h-6 animate-spin" />
+                                <Loader2 className="w-6 h-6 animate-spin" />
                                 Procesando tu orden...
                             </>
                         ) : (
@@ -151,5 +152,13 @@ export default function UpsellPage() {
                 <p>Copyright © {new Date().getFullYear()} ClicUp. Todos los derechos reservados.</p>
             </footer>
         </div>
+    );
+}
+
+export default function UpsellPage() {
+    return (
+        <Suspense fallback={<div className="min-h-screen bg-gray-950 flex items-center justify-center text-white">Cargando...</div>}>
+            <UpsellContent />
+        </Suspense>
     );
 }
