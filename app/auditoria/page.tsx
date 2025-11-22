@@ -1,17 +1,16 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import TechBackground from '@/components/ui/tech-background';
 import AuditFormEmbed from '@/components/forms/AuditFormEmbed';
-import { ShieldCheck, Zap, TrendingUp, Lock } from 'lucide-react';
+import { ShieldCheck, Zap } from 'lucide-react';
 
 export default function AuditPage() {
     return (
         <div className="min-h-screen font-sans selection:bg-green-400 selection:text-blue-950 bg-[#0B1120] relative flex flex-col items-center justify-center overflow-x-hidden">
 
-            {/* Enhanced Background Effects */}
-            <div className="fixed inset-0 w-full h-full bg-[url('/grid.svg')] opacity-[0.04] pointer-events-none" />
-            <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-blue-600/20 rounded-full blur-[120px] pointer-events-none opacity-50 mix-blend-screen" />
-            <div className="fixed bottom-0 right-0 w-[800px] h-[600px] bg-purple-600/10 rounded-full blur-[100px] pointer-events-none opacity-30" />
+            {/* Advanced Tech Background */}
+            <TechBackground />
 
             {/* Content Container */}
             <section className="w-full max-w-4xl mx-auto px-4 py-12 relative z-10 flex flex-col items-center">
