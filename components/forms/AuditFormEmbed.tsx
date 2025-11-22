@@ -21,7 +21,7 @@ export default function AuditFormEmbed() {
     }, []);
 
     return (
-        <div className="w-full bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl overflow-hidden shadow-2xl relative group">
+        <div className="w-full relative group">
             {/* Glow Effect Removed as per user request */}
 
             <div className="relative">

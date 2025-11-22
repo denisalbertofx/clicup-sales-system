@@ -6,121 +6,71 @@ import { ShieldCheck, Zap, TrendingUp, Lock } from 'lucide-react';
 
 export default function AuditPage() {
     return (
-        <div className="min-h-screen font-sans selection:bg-green-400 selection:text-blue-950 bg-[#0B1120] overflow-hidden relative">
+        <div className="min-h-screen font-sans selection:bg-green-400 selection:text-blue-950 bg-[#0B1120] relative flex flex-col items-center justify-center overflow-x-hidden">
 
-            {/* Background Effects */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[800px] bg-gradient-to-b from-blue-900/20 to-transparent pointer-events-none" />
-            <div className="absolute top-0 left-0 w-full h-full bg-[url('/grid.svg')] opacity-[0.03] pointer-events-none" />
+            {/* Enhanced Background Effects */}
+            <div className="fixed inset-0 w-full h-full bg-[url('/grid.svg')] opacity-[0.04] pointer-events-none" />
+            <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-blue-600/20 rounded-full blur-[120px] pointer-events-none opacity-50 mix-blend-screen" />
+            <div className="fixed bottom-0 right-0 w-[800px] h-[600px] bg-purple-600/10 rounded-full blur-[100px] pointer-events-none opacity-30" />
 
-            {/* Hero Section */}
-            <section className="max-w-7xl mx-auto px-4 py-16 md:py-24 relative z-10">
-                <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Content Container */}
+            <section className="w-full max-w-4xl mx-auto px-4 py-12 relative z-10 flex flex-col items-center">
 
-                    {/* Left Column: Copy & Value Prop */}
-                    <motion.div
-                        initial={{ opacity: 0, x: -50 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8 }}
-                        className="text-left space-y-8"
-                    >
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 backdrop-blur-sm">
-                            <span className="relative flex h-2 w-2">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                            </span>
-                            <span className="text-blue-400 text-xs font-bold tracking-wider uppercase">
-                                Sistema de Auditoría IA v2.0
-                            </span>
+                {/* Header Section */}
+                <motion.div
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                    className="text-center mb-12 space-y-6"
+                >
+                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 backdrop-blur-sm mx-auto">
+                        <span className="relative flex h-2 w-2">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                        </span>
+                        <span className="text-blue-400 text-xs font-bold tracking-wider uppercase">
+                            Auditoría IA Gratuita
+                        </span>
+                    </div>
+
+                    <h1 className="text-4xl md:text-6xl font-extrabold text-white leading-tight tracking-tight">
+                        Analiza tu Negocio en <br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-gradient-x">
+                            Tiempo Real
+                        </span>
+                    </h1>
+
+                    <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+                        Descubre exactamente qué está frenando tus ventas y recibe un plan de acción personalizado.
+                    </p>
+                </motion.div>
+
+                {/* Widget Container - Centered & Seamless */}
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.95 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    className="w-full max-w-2xl relative"
+                >
+                    {/* Subtle Glow behind widget */}
+                    <div className="absolute -inset-4 bg-gradient-to-r from-cyan-500/20 to-blue-600/20 rounded-3xl blur-2xl opacity-50 pointer-events-none"></div>
+
+                    <div className="relative z-10">
+                        <AuditFormEmbed />
+                    </div>
+
+                    <div className="mt-8 flex justify-center items-center gap-6 text-sm text-gray-500">
+                        <div className="flex items-center gap-2">
+                            <ShieldCheck className="w-4 h-4 text-green-400" />
+                            <span>Datos 100% Seguros</span>
                         </div>
-
-                        <h1 className="text-5xl md:text-7xl font-extrabold text-white leading-tight tracking-tight">
-                            Descubre Dónde <br />
-                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 animate-gradient-x">
-                                Pierdes Dinero
-                            </span>
-                        </h1>
-
-                        <p className="text-xl text-gray-400 max-w-xl leading-relaxed">
-                            Nuestra IA analiza tu presencia digital en segundos y te revela exactamente qué está frenando tus ventas. <span className="text-white font-semibold">Sin costo. Sin compromiso.</span>
-                        </p>
-
-                        <div className="flex flex-col gap-4">
-                            <div className="flex items-center gap-3 text-gray-300">
-                                <div className="p-2 rounded-lg bg-green-500/10 text-green-400">
-                                    <Zap className="w-5 h-5" />
-                                </div>
-                                <span>Análisis de SEO y Velocidad Web</span>
-                            </div>
-                            <div className="flex items-center gap-3 text-gray-300">
-                                <div className="p-2 rounded-lg bg-blue-500/10 text-blue-400">
-                                    <TrendingUp className="w-5 h-5" />
-                                </div>
-                                <span>Revisión de Reputación Online</span>
-                            </div>
-                            <div className="flex items-center gap-3 text-gray-300">
-                                <div className="p-2 rounded-lg bg-purple-500/10 text-purple-400">
-                                    <Lock className="w-5 h-5" />
-                                </div>
-                                <span>Detección de Fugas de Conversión</span>
-                            </div>
+                        <div className="flex items-center gap-2">
+                            <Zap className="w-4 h-4 text-yellow-400" />
+                            <span>Resultados Instantáneos</span>
                         </div>
+                    </div>
+                </motion.div>
 
-                        <div className="pt-8 border-t border-gray-800/50">
-                            <div className="flex items-center gap-4">
-                                <div className="flex -space-x-3">
-                                    {[1, 2, 3, 4].map((i) => (
-                                        <div key={i} className="w-10 h-10 rounded-full border-2 border-[#0B1120] bg-gray-700 overflow-hidden relative">
-                                            <img
-                                                src={`https://i.pravatar.cc/100?img=${i + 10}`}
-                                                alt="User"
-                                                className="w-full h-full object-cover"
-                                            />
-                                        </div>
-                                    ))}
-                                </div>
-                                <div className="text-sm">
-                                    <div className="flex items-center gap-1 text-yellow-400">
-                                        {'★★★★★'.split('').map((s, i) => <span key={i}>{s}</span>)}
-                                    </div>
-                                    <p className="text-gray-500"><span className="text-white font-bold">1,200+</span> negocios analizados</p>
-                                </div>
-                            </div>
-                        </div>
-                    </motion.div>
-
-                    {/* Right Column: The Widget */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 50 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
-                        className="relative"
-                    >
-                        {/* Decorative Elements behind widget */}
-                        <div className="absolute -top-20 -right-20 w-64 h-64 bg-purple-500/20 rounded-full blur-3xl pointer-events-none animate-pulse"></div>
-                        <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-cyan-500/20 rounded-full blur-3xl pointer-events-none animate-pulse" style={{ animationDelay: '1s' }}></div>
-
-                        <div className="relative z-10">
-                            <div className="mb-6 flex items-center justify-between">
-                                <div className="flex items-center gap-2 text-green-400 bg-green-400/10 px-3 py-1 rounded-full text-xs font-bold border border-green-400/20">
-                                    <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-                                    DISPONIBLE AHORA
-                                </div>
-                                <div className="flex items-center gap-1 text-gray-500 text-xs">
-                                    <ShieldCheck className="w-3 h-3" />
-                                    100% Seguro
-                                </div>
-                            </div>
-
-                            {/* The Widget Component */}
-                            <AuditFormEmbed />
-
-                            <p className="text-center text-xs text-gray-600 mt-4">
-                                Al hacer clic en &quot;Analizar&quot;, aceptas recibir tu reporte detallado y consejos de optimización.
-                            </p>
-                        </div>
-                    </motion.div>
-
-                </div>
             </section>
         </div>
     );
