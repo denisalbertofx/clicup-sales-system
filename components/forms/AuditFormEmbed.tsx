@@ -15,40 +15,32 @@ export default function AuditFormEmbed() {
         document.body.appendChild(script);
 
         // Construct URL with parameters
-        const params = new URLSearchParams();
-
-        // Map standard params to GHL expected keys (assuming standard keys for now)
-        // Adjust these keys if GHL uses different ones (e.g. 'first_name' vs 'name')
-        if (searchParams.get('first_name')) params.append('first_name', searchParams.get('first_name')!);
-        if (searchParams.get('email')) params.append('email', searchParams.get('email')!);
-        if (searchParams.get('website')) params.append('website', searchParams.get('website')!);
-
-        if (params.toString()) {
-            setIframeSrc(`https://services.leadconnectorhq.com/prospecting/widgets/load/692065c2c4a66ab14a73875d?${params.toString()}`);
-        }
-
         return () => {
-            // Cleanup if necessary
             if (document.body.contains(script)) {
                 document.body.removeChild(script);
             }
         };
-    }, [searchParams]);
+    }, []);
 
     return (
-        <div className="w-full max-w-2xl mx-auto bg-card/50 backdrop-blur-sm border border-border rounded-2xl overflow-hidden shadow-2xl">
-            <iframe
-                id="prospecting-widget"
-                src={iframeSrc}
-                style={{
-                    display: 'block',
-                    width: '100%',
-                    border: 'none',
-                    minHeight: '600px',
-                }}
-                className="w-full"
-                title="Marketing Audit Form"
-            />
+        <div className="w-full bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl overflow-hidden shadow-2xl relative group">
+            {/* Glow Effect */}
+            <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 to-green-400 rounded-2xl blur opacity-10 group-hover:opacity-20 transition duration-1000"></div>
+
+            <div className="relative">
+                <iframe
+                    id="prospecting-widget"
+                    src="https://services.leadconnectorhq.com/prospecting/widgets/load/6921267d4f967a624e99e932"
+                    style={{
+                        display: 'block',
+                        width: '100%',
+                        border: 'none',
+                        minHeight: '600px', // Ensure enough height
+                    }}
+                    className="w-full"
+                    title="Marketing Audit Form"
+                />
+            </div>
         </div>
     );
 }
