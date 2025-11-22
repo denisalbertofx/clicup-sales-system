@@ -69,8 +69,12 @@ export default function LeadMagnetPage() {
                             <div className="flex items-center gap-4">
                                 <div className="flex -space-x-3">
                                     {[1, 2, 3, 4].map((i) => (
-                                        <div key={i} className="w-10 h-10 rounded-full border-2 border-[#0B1120] bg-gray-700 overflow-hidden">
-                                            <img src={`https://i.pravatar.cc/100?img=${i + 10}`} alt="User" className="w-full h-full object-cover" />
+                                        <div key={i} className="w-10 h-10 rounded-full border-2 border-[#0B1120] bg-gray-700 overflow-hidden relative">
+                                            <img
+                                                src={`https://i.pravatar.cc/100?img=${i + 10}`}
+                                                alt="User"
+                                                className="w-full h-full object-cover"
+                                            />
                                         </div>
                                     ))}
                                 </div>
@@ -111,7 +115,7 @@ export default function LeadMagnetPage() {
                             <AuditFormEmbed />
 
                             <p className="text-center text-xs text-gray-600 mt-4">
-                                Al hacer clic en "Analizar", aceptas recibir tu reporte detallado y consejos de optimización.
+                                Al hacer clic en &quot;Analizar&quot;, aceptas recibir tu reporte detallado y consejos de optimización.
                             </p>
                         </div>
                     </motion.div>
