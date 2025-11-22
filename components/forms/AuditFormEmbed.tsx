@@ -22,8 +22,7 @@ export default function AuditFormEmbed() {
 
     return (
         <div className="w-full bg-gray-900/50 backdrop-blur-sm border border-gray-800 rounded-2xl overflow-hidden shadow-2xl relative group">
-            {/* Glow Effect */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400 to-green-400 rounded-2xl blur opacity-10 group-hover:opacity-20 transition duration-1000"></div>
+            {/* Glow Effect Removed as per user request */}
 
             <div className="relative">
                 <iframe
