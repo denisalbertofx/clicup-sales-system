@@ -46,6 +46,22 @@ export default function TechBackground() {
             {/* 4. Central Glow - Brighter */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-gradient-to-r from-transparent via-blue-400/10 to-transparent blur-3xl pointer-events-none" />
 
+            {/* 5. Footer Integration - Seamless Grid Transition */}
+            <div className="absolute bottom-0 left-0 w-full h-[300px] pointer-events-none overflow-hidden">
+                <div className="absolute inset-0 opacity-20">
+                    <svg width="100%" height="100%">
+                        <defs>
+                            <pattern id="footer-grid-bg" width="40" height="40" patternUnits="userSpaceOnUse">
+                                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="1" className="text-blue-500" />
+                            </pattern>
+                        </defs>
+                        <rect width="100%" height="100%" fill="url(#footer-grid-bg)" />
+                    </svg>
+                </div>
+                {/* Fade out the grid as it goes up */}
+                <div className="absolute inset-0 bg-gradient-to-t from-transparent via-[#0B1120]/50 to-[#0B1120]" />
+            </div>
+
         </div>
     );
 }

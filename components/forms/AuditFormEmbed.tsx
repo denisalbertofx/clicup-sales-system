@@ -36,6 +36,7 @@ export default function AuditFormEmbed() {
                     }}
                     className="w-full"
                     title="Marketing Audit Form"
+                    loading="lazy"
                 />
             </div>
         </div>
